@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:36:15 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/15 01:09:47 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/15 17:24:22 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <fcntl.h>
 # include "../mlx_linux/mlx.h"
 # include "../mlx_linux/mlx_int.h"
+# include "../libft/inc/ft_printf.h"
+
 
 # define TILE_SIZE 64
 
@@ -40,6 +42,8 @@ typedef struct s_point
 {
 	int	x;
 	int	y;
+	int		size_x;
+	int		size_y;
 }	t_point;
 
 typedef struct s_image
@@ -96,12 +100,11 @@ void	render_map(t_game *game);
 
 /* Player movement */
 int		handle_keypress(int keycode, t_game *game);
-void	move_player(t_game *game, int new_x, int new_y);
 
 /* Utils */
 void	error_exit(char *message);
 int		close_game(t_game *game);
-int     ft_strlen(char *str);
+int ft_strlen(const char *str);
 int     ft_strncmp(char *s1, char *s2, int n);
 int     count_lines(char *filename);
 int     get_map_width(char *filename);
@@ -116,7 +119,7 @@ int     init_game(t_game *game, char *map_file);
 void    load_textures(t_game *game);
 void    render_map(t_game *game);
 int     handle_keypress(int keycode, t_game *game);
-void    move_player(t_game *game, int new_x, int new_y);
+void    move_player(t_game *game, int new_x, int new_y, int old_x);
 int     close_game(t_game *game);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:41:49 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/09 15:21:49 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/15 16:27:06 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void flood_fill(char **grid_copy, int x, int y, t_map *map)
+void	flood_fill(char **grid_copy, int x, int y, t_map *map)
 {
 	if (x < 0 || x >= map->width || y < 0 || y >= map->height)
 		return ;
@@ -25,7 +25,7 @@ void flood_fill(char **grid_copy, int x, int y, t_map *map)
 	flood_fill(grid_copy, x, y - 1, map);
 }
 
-char **copy_grid(t_map *map)
+char	**copy_grid(t_map *map)
 {
 	char	**copy;
 	int		x;
@@ -56,7 +56,7 @@ char **copy_grid(t_map *map)
 	return (copy);
 }
 
-int is_unreachable(t_map *map, char **grid_copy, int x, int y)
+int	is_unreachable(t_map *map, char **grid_copy, int x, int y)
 {
 	if ((map->grid[y][x] == COLLECTIBLE || map->grid[y][x] == EXIT)
 		&& grid_copy[y][x] != 'V')
@@ -64,7 +64,7 @@ int is_unreachable(t_map *map, char **grid_copy, int x, int y)
 	return (0);
 }
 
-int check_valid_path(t_map *map)
+int	check_valid_path(t_map *map)
 {
 	char	**grid_copy;
 	int		x;

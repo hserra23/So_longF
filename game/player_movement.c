@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 17:06:48 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/14 17:45:39 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/15 16:05:56 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void move_player(t_game *game, int new_x, int new_y, int old_x)
 	int old_y;
 
 	if(!can_move(game, new_x, new_y))
-		return(0);
+		return;
 	old_x = game->map.player_pos.x;
 	old_y = game->map.player_pos.y;
 	tile = game->map.grid[new_y][new_x];

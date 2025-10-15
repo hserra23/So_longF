@@ -6,89 +6,95 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 13:08:31 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/10 17:14:32 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/15 17:28:35 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/ft_get_next_line.h"
 #include "../../inc/libft.h"
 
-char	*process_line(char **stash)
+int	ft_linelen(char *str)
 {
-	char	*line;
-	char	*leftovers;
-	int		len;
+	int	count;
 
-	len = 0;
-	while ((*stash)[len] != '\n' && (*stash)[len] != '\0')
-		len++;
-	if ((*stash)[len] == '\n')
-	{
-		line = ft_substr(*stash, 0, len + 1);
-		leftovers = ft_substr(*stash, len + 1, ft_strlen(*stash) - (len + 1));
-		free(*stash);
-		*stash = leftovers;
-		return (line);
-	}
-	return (NULL);
+	count = 0;
+	while (str && str[count] && str[count] != '\n')
+		count++;
+	if (str && str[count] == '\n')
+		count++;
+	return (count);
 }
 
-char	*read_from_fd(int fd)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*line_read;
-	int		read_bytes;
+	int		count;
+	int		count2;
+	char	*joined;
 
-	line_read = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!line_read)
-		return (NULL);
-	read_bytes = read(fd, line_read, BUFFER_SIZE);
-	if (read_bytes <= 0)
+	count = 0;
+	joined = (char *)malloc(ft_linelen(s1) + ft_linelen(s2) + 1);
+	if (!joined)
+		return (free(s1), NULL);
+	while (s1 && s1[count])
 	{
-		free(line_read);
-		return (NULL);
+		joined[count] = s1[count];
+		count++;
 	}
-	line_read[read_bytes] = '\0';
-	return (line_read);
+	count2 = 0;
+	while (s2[count2] != '\n' && s2[count2])
+	{
+		joined[count + count2] = s2[count2];
+		count2++;
+	}
+	if (s2[count2] == '\n')
+		joined[count + count2++] = '\n';
+	joined[count + count2] = '\0';
+	if (s1)
+		free(s1);
+	return (joined);
 }
 
-char	*get_next_line_helper(char **stash, int fd)
+void	buffer_clean(char *str)
 {
-	char		*tmp_stash;
-	char		*line_read;
-	char		*line;
+	int	count;
+	int	count2;
 
-	line = process_line(stash);
-	if (line)
-		return (line);
-	line_read = read_from_fd(fd);
-	if (!line_read)
+	count = 0;
+	count2 = 0;
+	while (str[count] != '\n' && str[count] != '\0')
+		count++;
+	if (str[count] == '\n')
 	{
-		line = ft_strdup(*stash);
-		free(*stash);
-		*stash = NULL;
-		if (*line)
-			return (line);
-		free(line);
-		return (NULL);
+		count++;
+		while (str[count])
+			str[count2++] = str[count++];
 	}
-	tmp_stash = ft_strjoin(*stash, line_read);
-	free(*stash);
-	*stash = tmp_stash;
-	free(line_read);
-	return (get_next_line_helper(stash, fd));
+	while (count2 < BUFFER_SIZE)
+		str[count2++] = '\0';
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*stash[MAX_FD];
+	static char	buffer[BUFFER_SIZE + 1];
+	char		*str;
+	int			count;
 
-	if (fd < 0 || fd >= MAX_FD || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
+	count = 0;
+	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
-		free(stash[fd]);
-		stash[fd] = NULL;
+		while (count <= BUFFER_SIZE)
+			buffer[count++] = '\0';
 		return (NULL);
 	}
-	if (!stash[fd])
-		stash[fd] = ft_strdup("");
-	return (get_next_line_helper(&stash[fd], fd));
+	str = NULL;
+	while (buffer[0] || read(fd, buffer, BUFFER_SIZE) > 0)
+	{
+		str = ft_strjoin(str, buffer);
+		if (!str)
+			return (NULL);
+		buffer_clean(buffer);
+		if (str[ft_linelen(str) - 1] == '\n')
+			return (str);
+	}
+	return (str);
 }

@@ -6,25 +6,26 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 13:00:11 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/09 14:22:14 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/15 17:35:02 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#define GET_NEXT_LINE_H
 
-# include <stdlib.h>
-# include <unistd.h>
-
+#ifndef MAX_FD
 # define MAX_FD 1024
+#endif
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 1
+#endif
 
-char	*process_line(char **stash);
-char	*read_from_fd(int fd);
-char	*get_next_line_helper(char **stash, int fd);
-char	*get_next_line_bonus(int fd); 
+#include <stdlib.h>
+#include <unistd.h>
 
+char    *ft_strjoin(char *s1, char *s2);
+char    *ft_substr(char *s, int start, int len);
+char    *ft_strdup(const char *s);
+int 	ft_strlen(const char *str);
 #endif
