@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:10:49 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/10 17:03:00 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/16 16:08:07 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,16 @@ void	count_map_elements(t_map *map)
 		}y++;
 	}
 }
-t_map	parse_map(char *filename)
-{
-	t_map	map;
-	int i;
 
+t_map parse_map(char *filename)
+{
+	t_map map;
+	int i;
+	
 	i = 0;
 	if (!filename)
 		error_exit("Error\nNo map file provided");
-	if (ft_strlen(filename) < 4 || 
+	if (ft_strlen(filename) < 4 ||
 		ft_strncmp(filename + ft_strlen(filename) - 4, ".ber", 4) != 0)
 		error_exit("Error\nMap file must have .ber extension");
 	map.height = count_lines(filename);
@@ -52,6 +53,13 @@ t_map	parse_map(char *filename)
 	if (map.height < 3 || map.width < 3)
 		error_exit("Error\nMap too small (minimum 3x3)");
 	map.grid = read_map_grid(filename, map.height, i);
+	if (!map.grid)
+		error_exit("Error\nFailed to allocate map grid");
+	map.collectibles = 0;
+	map.exits = 0;
+	map.players = 0;
+	map.player_pos.x = 0;
+	map.player_pos.y = 0;
 	count_map_elements(&map);
 	return (map);
 }

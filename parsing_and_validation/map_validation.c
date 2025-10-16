@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:08:51 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/15 17:41:41 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/16 16:09:29 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int check_rectangular(t_map *map)
 	while (y < map->height)
 	{
 		width = ft_strlen(map->grid[y]);
-		ft_printf("Row %d: width = %d (expected %d)\n", y, width, map->width);
-		ft_printf("Line content: \"%s\"\n", map->grid[y]);
 		if (width != map->width)
 			return (0);
 		y++;
@@ -92,14 +90,29 @@ int	check_element_count(t_map *map)
 int	validate_map(t_map *map)
 {
 	if (!check_rectangular(map))
+	{
+		free_map(map->grid);
 		error_exit("Error\nMap is not rectangular");
+	}
 	if (!check_valid_chars(map))
+	{
+		free_map(map->grid);
 		error_exit("Error\nMap contains invalid characters");
+	}
 	if (!check_walls(map))
+	{
+		free_map(map->grid);
 		error_exit("Error\nMap is not surrounded by walls");
+	}
 	if (!check_element_count(map))
+	{
+		free_map(map->grid);
 		error_exit("Error\nInvalid number of players/exits/collectibles");
+	}
 	if (!check_valid_path(map))
+	{
+		free_map(map->grid);
 		error_exit("Error\nNo valid path to all collectibles and exit");
+	}
 	return (1);
 }

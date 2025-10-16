@@ -2,7 +2,7 @@
 static char *_f4f3675293b41dad9a0207204e607a8J23WqnONtXfCaUPS[] = {
 /* columns rows colors chars-per-pixel */
 "64 64 206 2 ",
-"   c white",
+"   c #70C8A0",
 ".  c #788098",
 "X  c #F97060",
 "o  c #414A52",
