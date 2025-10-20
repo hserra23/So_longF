@@ -6,7 +6,7 @@
 #    By: hserra <hserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 14:42:59 by hserra            #+#    #+#              #
-#    Updated: 2025/10/17 12:44:51 by hserra           ###   ########.fr        #
+#    Updated: 2025/10/20 15:40:31 by hserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ PARSE_SRCS = $(PARSE_DIR)/main.c \
              $(PARSE_DIR)/map_parsing_utils.c \
              $(PARSE_DIR)/map_validation.c \
              $(PARSE_DIR)/map_validation_utils.c \
-             $(PARSE_DIR)/utils_parsing.c
+             $(PARSE_DIR)/utils_parsing.c \
+			 $(PARSE_DIR)/map_validation_p2.c \
 
 GAME_SRCS = $(GAME_DIR)/game_init.c \
             $(GAME_DIR)/render.c \

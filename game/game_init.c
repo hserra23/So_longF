@@ -6,24 +6,24 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 12:38:19 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/20 14:23:14 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/20 14:56:18 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int check_file(char *path)
+static int	check_file(char *path)
 {
-	int fd;
-	
+	int	fd;
+
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (0);
-	close (fd);
+	close(fd);
 	return (1);
 }
 
-static void check_texture_files(t_map *map)
+static void	check_texture_files(t_map *map)
 {
 	if (!check_file("imgs/wall.xpm"))
 	{
@@ -54,8 +54,9 @@ static void check_texture_files(t_map *map)
 
 void	load_image(t_game *game, t_image *img, char *path)
 {
-	img->img = mlx_xpm_file_to_image(game->mlx, path, &img->width, &img->height);
-	if(!img->img)
+	img->img = mlx_xpm_file_to_image(game->mlx, path, &img->width,
+			&img->height);
+	if (!img->img)
 	{
 		ft_printf("Error: Failed to load texture: %s\n", path);
 		close_game(game);
@@ -77,13 +78,13 @@ int	init_game(t_game *game, char *map_file)
 	validate_map(&game->map);
 	check_texture_files(&game->map);
 	game->mlx = mlx_init();
-	if(!game->mlx)
+	if (!game->mlx)
 	{
 		free_map(game->map.grid);
 		error_exit("Error\nFailed to initialize MLX\n");
 	}
-	game->win = mlx_new_window(game->mlx, game->map.width * TILE_SIZE, 
-		game->map.height * TILE_SIZE, "so_long");
+	game->win = mlx_new_window(game->mlx, game->map.width * TILE_SIZE,
+			game->map.height * TILE_SIZE, "so_long");
 	if (!game->win)
 	{
 		free_map(game->map.grid);

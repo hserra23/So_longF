@@ -6,16 +6,18 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 13:07:49 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/15 17:22:49 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/20 15:55:31 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/libft.h"
 
-int ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
-    int i = 0;
-    while (str && str[i])
-        i++;
-    return (i);
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+		i++;
+	return (i);
 }

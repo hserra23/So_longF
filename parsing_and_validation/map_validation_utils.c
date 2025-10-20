@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:41:49 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/20 12:18:05 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/20 15:42:50 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,19 @@ char	**copy_grid(t_map *map)
 	int		x;
 	int		y;
 
-	copy = (char **)malloc(sizeof(char *) * (map->height + 1));
+	copy = malloc(sizeof(char *) * (map->height + 1));
 	if (!copy)
 		return (NULL);
-	y = 0;
-	while (y < map->height)
+	y = -1;
+	while (++y < map->height)
 	{
-		copy[y] = (char *)malloc(sizeof(char) * (map->width + 1));
+		copy[y] = malloc(sizeof(char) * (map->width + 1));
 		if (!copy[y])
-		{
-			free_map(copy);
-			return (NULL);
-		}
-		x = 0;
-		while (x < map->width)
-		{
+			return (free_map(copy), NULL);
+		x = -1;
+		while (++x < map->width)
 			copy[y][x] = map->grid[y][x];
-			x++;
-		}
 		copy[y][x] = '\0';
-		y++;
 	}
 	copy[y] = NULL;
 	return (copy);

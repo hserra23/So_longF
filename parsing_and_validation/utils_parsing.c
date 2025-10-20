@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:00:43 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/16 15:56:10 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/20 15:45:25 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,21 @@ void	error_exit(char *message)
 	write(2, message, ft_strlen(message));
 	exit(1);
 }
-int ft_strlen(const char *str)
+
+int	ft_strlen(const char *str)
 {
-    int i = 0;
-    while (str && str[i])
-        i++;
-    return (i);
+	int		i;
+
+	i = 0;
+	while (str && str[i])
+		i++;
+	return (i);
 }
-int ft_strncmp(char *s1, char *s2, int n)
+
+int	ft_strncmp(char *s1, char *s2, int n)
 {
-	int i;
-	
+	int	i;
+
 	if (!s1 || !s2)
 		return (0);
 	i = 0;

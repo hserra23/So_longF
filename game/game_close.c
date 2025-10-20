@@ -6,15 +6,15 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 00:37:11 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/15 00:38:28 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/20 14:56:08 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void destroy_images(t_game *game)
+static void	destroy_images(t_game *game)
 {
-    if (game->img_wall.img)
+	if (game->img_wall.img)
 		mlx_destroy_image(game->mlx, game->img_wall.img);
 	if (game->img_floor.img)
 		mlx_destroy_image(game->mlx, game->img_floor.img);
@@ -41,4 +41,3 @@ int	close_game(t_game *game)
 	exit(0);
 	return (0);
 }
-        

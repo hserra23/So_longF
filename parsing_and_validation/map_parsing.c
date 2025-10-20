@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:10:49 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/20 12:16:59 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/20 15:16:06 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	count_map_elements(t_map *map)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < map->height)
@@ -32,21 +32,23 @@ void	count_map_elements(t_map *map)
 				map->players++;
 				map->player_pos.x = x;
 				map->player_pos.y = y;
-			} x++;
-		}y++;
+			}
+			x++;
+		}
+		y++;
 	}
 }
 
-t_map parse_map(char *filename)
+t_map	parse_map(char *filename)
 {
-	t_map map;
-	int i;
-	
+	t_map	map;
+	int		i;
+
 	i = 0;
 	if (!filename)
 		error_exit("Error\nNo map file provided\n");
-	if (ft_strlen(filename) < 4 ||
-		ft_strncmp(filename + ft_strlen(filename) - 4, ".ber", 4) != 0)
+	if (ft_strlen(filename) < 4 || ft_strncmp(filename + ft_strlen(filename)
+			- 4, ".ber", 4) != 0)
 		error_exit("Error\nMap file must have .ber extension\n");
 	map.height = count_lines(filename);
 	map.width = get_map_width(filename);
