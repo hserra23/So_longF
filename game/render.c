@@ -6,21 +6,21 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:21:43 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/16 14:34:49 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/20 12:20:29 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	put_image(t_game *game, t_image *img, int x, int y)
+void	put_image(t_game *game, t_image *img, int x, int y)
 {
 	mlx_put_image_to_window(game->mlx, game->win, img->img, x * TILE_SIZE, y * TILE_SIZE);
 }
 
-static void	render_tile(t_game *game, int x, int y)
+void	render_tile(t_game *game, int x, int y)
 {
 	char tile;
-	tile = game->map.grid[y][x];  // Fixed: was grid[x][y]
+	tile = game->map.grid[y][x];
 	put_image(game, &game->img_floor, x, y);
 	if (tile == WALL)
 		put_image(game, &game->img_wall, x, y);
@@ -46,8 +46,7 @@ void	render_map(t_game *game)
 		x = 0;
 		while (x < game->map.width)
 		{
-			ft_printf("Rendering tile [%d][%d] = '%c'\n", y, x, game->map.grid[y][x]);
-			render_tile(game, x, y);  // This is correct - x is column, y is row
+			render_tile(game, x, y);
 			x++;
 		}
 		y++;

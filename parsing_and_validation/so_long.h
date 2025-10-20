@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:36:15 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/15 17:24:22 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/17 15:06:41 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,11 @@ void	load_textures(t_game *game);
 
 /* Rendering */
 void	render_map(t_game *game);
+void	render_tile(t_game *game, int x, int y);
+void	put_image(t_game *game, t_image *img, int x, int y);
 
 /* Player movement */
-int		handle_keypress(int keycode, t_game *game);
+int	handle_keypress(int keycode, t_game *game);
 
 /* Utils */
 void	error_exit(char *message);

@@ -6,7 +6,7 @@
 #    By: hserra <hserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 14:42:59 by hserra            #+#    #+#              #
-#    Updated: 2025/10/15 01:24:07 by hserra           ###   ########.fr        #
+#    Updated: 2025/10/17 12:44:51 by hserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ PARSE_SRCS = $(PARSE_DIR)/main.c \
 GAME_SRCS = $(GAME_DIR)/game_init.c \
             $(GAME_DIR)/render.c \
             $(GAME_DIR)/player_movement.c \
-            $(GAME_DIR)/game_close.c
+            $(GAME_DIR)/game_close.c \
 
 SRCS = $(PARSE_SRCS) $(GAME_SRCS)
 

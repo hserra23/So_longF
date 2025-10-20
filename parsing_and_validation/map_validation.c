@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:08:51 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/16 16:09:29 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/20 12:18:26 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,27 +92,27 @@ int	validate_map(t_map *map)
 	if (!check_rectangular(map))
 	{
 		free_map(map->grid);
-		error_exit("Error\nMap is not rectangular");
+		error_exit("Error\nMap is not rectangular\n");
 	}
 	if (!check_valid_chars(map))
 	{
 		free_map(map->grid);
-		error_exit("Error\nMap contains invalid characters");
+		error_exit("Error\nMap contains invalid characters\n");
 	}
 	if (!check_walls(map))
 	{
 		free_map(map->grid);
-		error_exit("Error\nMap is not surrounded by walls");
+		error_exit("Error\nMap is not surrounded by walls\n");
 	}
 	if (!check_element_count(map))
 	{
 		free_map(map->grid);
-		error_exit("Error\nInvalid number of players/exits/collectibles");
+		error_exit("Error\nInvalid number of players/exits/collectibles\n");
 	}
 	if (!check_valid_path(map))
 	{
 		free_map(map->grid);
-		error_exit("Error\nNo valid path to all collectibles and exit");
+		error_exit("Error\nNo valid path to all collectibles and exit\n");
 	}
 	return (1);
 }

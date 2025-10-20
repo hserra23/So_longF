@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:41:49 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/15 16:27:06 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/20 12:18:05 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	check_valid_path(t_map *map)
 
 	grid_copy = copy_grid(map);
 	if (!grid_copy)
-		error_exit("Error\nMemory allocation failed");
+		error_exit("Error\nMemory allocation failed\n");
 	flood_fill(grid_copy, map->player_pos.x, map->player_pos.y, map);
 	y = 0;
 	while (y < map->height)

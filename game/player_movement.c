@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 17:06:48 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/15 16:05:56 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/20 12:19:14 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@ static int	can_move(t_game *game, int new_x, int new_y)
 {
 	char tile;
 	
-	if (new_x < 0 || new_x >= game->map.width || new_y < 0 || new_y >= game->map.height)
-		return(0);
+	if (new_x < 0 || new_x >= game->map.width || 
+		new_y < 0 || new_y >= game->map.height)
+		return (0);
 	tile = game->map.grid[new_y][new_x];
 	if (tile == WALL)
 		return (0);
-	if (tile == EXIT && game->collected < game->map.collectibles)
-		return(0);
-	return(1);
+	return (1);
 }
 
 void move_player(t_game *game, int new_x, int new_y, int old_x)
@@ -46,13 +45,13 @@ void move_player(t_game *game, int new_x, int new_y, int old_x)
 		ft_printf("You won in %d moves!\n", game->moves + 1);
 		close_game(game);
 	}
-	game->map.grid[old_y][old_x] = EMPTY;
-	game->map.grid[new_y][new_x] = PLAYER;
+	if (game->map.grid[old_y][old_x] != EXIT)
+		game->map.grid[old_y][old_x] = EMPTY;
 	game->map.player_pos.x = new_x;
 	game->map.player_pos.y = new_y;
 	game->moves++;
-	ft_printf("Moves: %d\n", game->moves);
 	render_map(game);
+	put_image(game, &game->img_player, new_x, new_y);
 }
  
 int	handle_keypress(int keycode, t_game *game)

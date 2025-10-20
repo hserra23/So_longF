@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 13:38:35 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/16 14:29:12 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/20 12:26:22 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int count_lines(char *filename)
 	lines = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		error_exit("Error: Cannot open map file");
+		error_exit("Error: Cannot open map file\n");
 	line = get_next_line(fd);
 	while(line)
 	{
@@ -42,12 +42,12 @@ int get_map_width(char *filename)
 
     fd = open(filename, O_RDONLY);
     if (fd < 0)
-        error_exit("Error\nCannot open map file");
+        error_exit("Error\nCannot open map file\n");
     line = get_next_line(fd);
     if (!line)
     {
         close(fd);
-        error_exit("Error\nEmpty map file");
+        error_exit("Error\nEmpty map file\n");
     }
     len = ft_strlen(line);
     while (len > 0 && (line[len - 1] == '\n' || line[len - 1] == '\r'))
@@ -61,7 +61,7 @@ int get_map_width(char *filename)
     return (width);
 }
 
-char	**read_map_grid(char *filename, int height, int i)
+char **read_map_grid(char *filename, int height, int i)
 {
 	char **grid;
 	char *line;
@@ -70,20 +70,34 @@ char	**read_map_grid(char *filename, int height, int i)
 
 	grid = (char **)malloc(sizeof(char *) * (height + 1));
 	if (!grid)
-		error_exit("Error: Memory allocation failed");
+		error_exit("Error\nMemory allocation failed");
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		error_exit("Error: Cannot open map file");
+	{
+		free(grid);
+		error_exit("Error\nCannot open map file");
+	}
 	while (i < height)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			error_exit("Error: Failed to read map");
+		{
+			free_map(grid);
+			close(fd);
+			error_exit("Error\nFailed to read map");
+		}
 		len = ft_strlen(line);
 		while (len > 0 && (line[len - 1] == '\n' || line[len - 1] == '\r'))
 		{
-    		line[len - 1] = '\0';
-    		len--;
+			line[len - 1] = '\0';
+			len--;
+		}
+		if (len == 0)
+		{
+			free(line);
+			free_map(grid);
+			close(fd);
+			error_exit("Error\nMap contains empty lines");
 		}
 		grid[i++] = line;
 	}
