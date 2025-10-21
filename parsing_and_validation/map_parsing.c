@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:10:49 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/20 15:16:06 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/20 16:16:38 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,17 @@ t_map	parse_map(char *filename)
 
 	i = 0;
 	if (!filename)
-		error_exit("Error\nNo map file provided\n");
+		error_exit("Error: No map file provided\n");
 	if (ft_strlen(filename) < 4 || ft_strncmp(filename + ft_strlen(filename)
 			- 4, ".ber", 4) != 0)
-		error_exit("Error\nMap file must have .ber extension\n");
+		error_exit("Error: Map file must have .ber extension\n");
 	map.height = count_lines(filename);
 	map.width = get_map_width(filename);
 	if (map.height < 3 || map.width < 3)
-		error_exit("Error\nMap too small (minimum 3x3)\n");
+		error_exit("Error: Map too small (minimum 3x3)\n");
 	map.grid = read_map_grid(filename, map.height, i);
 	if (!map.grid)
-		error_exit("Error\nFailed to allocate map grid\n");
+		error_exit("Error: Failed to allocate map grid\n");
 	map.collectibles = 0;
 	map.exits = 0;
 	map.players = 0;

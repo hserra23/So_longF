@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 12:18:02 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/20 15:15:11 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/21 13:40:37 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_printf("Usage: %s <map_file.ber>\n", argv[0]);
+		ft_printf("Usage: %s <maps/map_file.ber>\n", argv[0]);
 		return (1);
 	}
 	init_game(&game, argv[1]);

@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:08:51 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/20 15:38:52 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/21 13:47:16 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	check_rectangular(t_map *map)
 			return (0);
 		y++;
 	}
+	if (y == map->width)
+		return (0);
 	return (1);
 }
 

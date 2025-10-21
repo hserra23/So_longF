@@ -6,7 +6,7 @@
 /*   By: hserra <hserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 13:38:35 by hserra            #+#    #+#             */
-/*   Updated: 2025/10/20 15:33:11 by hserra           ###   ########.fr       */
+/*   Updated: 2025/10/20 16:15:36 by hserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int	get_map_width(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		error_exit("Error\nCannot open map file\n");
+		error_exit("Error: Cannot open map file\n");
 	line = get_next_line(fd);
 	if (!line)
 	{
 		close(fd);
-		error_exit("Error\nEmpty map file\n");
+		error_exit("Error: Empty map file\n");
 	}
 	len = ft_strlen(line);
 	while (len > 0 && (line[len - 1] == '\n' || line[len - 1] == '\r'))
@@ -73,7 +73,7 @@ static void	validate_line(char *line, char **grid, int fd)
 		free(line);
 		free_map(grid);
 		close(fd);
-		error_exit("Error\nMap contains empty lines");
+		error_exit("Error: Map contains empty lines\n");
 	}
 }
 
@@ -83,7 +83,7 @@ static int	open_map_file(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		error_exit("Error\nCannot open map file");
+		error_exit("Error: Cannot open map file\n");
 	return (fd);
 }
 
@@ -95,7 +95,7 @@ char	**read_map_grid(char *filename, int height, int i)
 
 	grid = malloc(sizeof(char *) * (height + 1));
 	if (!grid)
-		error_exit("Error\nMemory allocation failed");
+		error_exit("Error: Memory allocation failed\n");
 	fd = open_map_file(filename);
 	while (i < height)
 	{
@@ -104,7 +104,7 @@ char	**read_map_grid(char *filename, int height, int i)
 		{
 			free_map(grid);
 			close(fd);
-			error_exit("Error\nFailed to read map");
+			error_exit("Error: Failed to read map\n");
 		}
 		validate_line(line, grid, fd);
 		grid[i++] = line;
